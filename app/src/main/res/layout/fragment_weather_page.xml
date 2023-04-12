@@ -20,16 +20,17 @@
             android:id="@+id/currentWeather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="top"
+            android:lineSpacingExtra="-5sp"
             android:text="Heavy rain"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:fontFamily="@font/poppins_regular"
-            android:lineSpacingExtra="-5sp"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:gravity="top"
             app:layout_constraintBottom_toTopOf="@+id/materialDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/currentTemperature"
+            app:layout_constraintStart_toStartOf="@+id/currentTemperature"
+            app:layout_constraintTop_toBottomOf="@id/currentTemperature" />
 
         <TextView
             android:id="@+id/currentTemperature"
@@ -42,8 +43,9 @@
             android:textColor="@color/white"
             android:textSize="72sp"
             app:layout_constraintBottom_toTopOf="@+id/currentWeather"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/currentDayAndNumberOfMonth"
+            app:layout_constraintStart_toStartOf="@+id/currentWeekDay"
+            app:layout_constraintTop_toBottomOf="@id/separatingLineImageView" />
 
         <TextView
             android:id="@+id/currentWeekDay"
@@ -58,19 +60,19 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/currentTemperature"
             app:layout_constraintEnd_toStartOf="@+id/separatingLineImageView"
-            app:layout_constraintTop_toBottomOf="@id/currentWeatherInPicture"/>
+            app:layout_constraintTop_toBottomOf="@id/currentWeatherInPicture" />
 
         <TextView
             android:id="@+id/currentDayAndNumberOfMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:fontFamily="@font/poppins_regular"
+            android:lineSpacingExtra="-5sp"
             android:text="Nov 14"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:fontFamily="@font/poppins_regular"
-            android:lineSpacingExtra="-5sp"
-            android:layout_marginStart="11dp"
-            android:layout_marginBottom="@dimen/default_margin"
             app:layout_constraintBottom_toTopOf="@+id/currentTemperature"
             app:layout_constraintStart_toEndOf="@+id/separatingLineImageView"
             app:layout_constraintTop_toBottomOf="@id/currentWeatherInPicture" />
@@ -80,8 +82,8 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:src="@drawable/degree"
-            android:layout_marginStart="95dp"
-            android:layout_marginTop="115dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,8 +93,6 @@
             android:id="@+id/separatingLineImageView"
             android:layout_width="2dp"
             android:layout_height="15dp"
-            android:layout_marginStart="11dp"
-            android:layout_marginEnd="11dp"
             android:layout_marginBottom="@dimen/default_margin"
             android:src="@drawable/separating_line"
             app:layout_constraintTop_toBottomOf="@id/currentWeatherInPicture"
@@ -102,8 +102,8 @@
 
         <ImageView
             android:id="@+id/currentWeatherInPicture"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:src="@drawable/sun_cloud_angled_rain"
             app:layout_constraintBottom_toTopOf="@+id/separatingLineImageView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,13 +114,151 @@
             android:id="@+id/materialDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="280dp"
             android:layout_marginHorizontal="@dimen/default_margin"
             app:dividerColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/windImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/wind_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
+
+        <TextView
+            android:id="@+id/windSpeedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="3.7 km/h"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintStart_toEndOf="@+id/windImageView"
+            app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
+
+        <TextView
+            android:id="@+id/windTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="8dp"
+            android:text="Wind"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintStart_toEndOf="@+id/windImageView"
+            app:layout_constraintTop_toBottomOf="@+id/windSpeedTextView" />
+        
+        <ImageView
+            android:id="@+id/thermometerImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/thermometer_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/windImageView"/>
+        
+        <TextView
+            android:id="@+id/mercuryPressureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="1010 mbar"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintStart_toEndOf="@id/thermometerImageView"
+            app:layout_constraintTop_toBottomOf="@id/windTextView"/>
+
+        <TextView
+            android:id="@+id/pressureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="8dp"
+            android:text="Pressure"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintStart_toEndOf="@id/thermometerImageView"
+            app:layout_constraintTop_toBottomOf="@id/mercuryPressureTextView"/>
+
+        <ImageView
+            android:id="@+id/chanceOfRainImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/cloud_angled_rain"
+            app:layout_constraintEnd_toStartOf="@+id/chanceOfRainTextView"
+            app:layout_constraintEnd_toStratOf="@id/chanceOfRainInPercentTextView"
+            app:layout_constraintTop_toBottomOf="@id/materialDivider" />
+
+        <TextView
+            android:id="@+id/chanceOfRainInPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/poppins_regular"
+            android:text="74%"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/chanceOfRainTextView"
+            app:layout_constraintTop_toBottomOf="@id/materialDivider" />
+
+        <TextView
+            android:id="@+id/chanceOfRainTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginEnd="42dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Chance of rain"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chanceOfRainInPercentTextView"/>
+
+        <ImageView
+            android:id="@+id/humidityImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/droplet"
+            app:layout_constraintTop_toBottomOf="@id/chanceOfRainImageView"
+            app:layout_constraintStart_toStartOf="@id/chanceOfRainImageView"/>
+
+        <TextView
+            android:id="@+id/humidityInPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="83%"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintTop_toBottomOf="@id/chanceOfRainTextView"
+            app:layout_constraintStart_toStartOf="@id/chanceOfRainTextView"/>
+
+        <TextView
+            android:id="@+id/humidityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:text="Humidity"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintTop_toBottomOf="@id/humidityInPercentTextView"
+            app:layout_constraintStart_toStartOf="@id/humidityInPercentTextView"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
