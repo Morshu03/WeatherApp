@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.presentation
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,7 +15,9 @@ import androidx.core.app.ActivityCompat
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
