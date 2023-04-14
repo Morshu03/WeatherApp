@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Погода</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="current_weather">Сильный дождь</string>
+    <string name="current_temperature">температура</string>
+    <string name="current_week_day">день недели</string>
+    <string name="current_month_and_number_of_month">месяц число</string>
+    <string name="wind_speed">0</string>
+    <string name="wind">Ветер</string>
+    <string name="mercury_pressure">0 мм</string>
+    <string name="pressure">Давление</string>
+    <string name="cloudiness_in_percent">Облачность</string>
+    <string name="cloudiness">Облачность</string>
+    <string name="humidity_in_percent">0%</string>
+    <string name="humidity">Влажность</string>
+</resources>

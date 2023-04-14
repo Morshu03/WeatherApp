@@ -1,5 +1,6 @@
 package com.example.weatherapp.di
 
+import com.example.weatherapp.data.api.WeatherService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    const val BASE_URL = "https://openweathermap.org"
+    const val BASE_URL = "https://api.openweathermap.org"
 
     @Singleton
     @Provides
@@ -42,4 +43,9 @@ object AppModule {
 
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
+
+    @Singleton
+    @Provides
+    fun provideWeatherService(retrofit: Retrofit): WeatherService =
+        retrofit.create(WeatherService::class.java)
 }
