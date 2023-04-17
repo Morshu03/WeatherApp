@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentWeatherPageBinding
 import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageUiState
+import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -35,19 +36,34 @@ class WeatherPageFragment : Fragment() {
                 is WeatherPageUiState.Error -> {
                     showToast(it.message)
                 }
+
                 is WeatherPageUiState.Success -> {
-                    binding.currentTemperature.text = it.temp.toString()
-                    binding.currentWeather.text = it.description
-                    binding.windSpeedTextView.text = it.speed.toString()
-                    binding.mercuryPressureTextView.text = it.pressure.toString()
-                    binding.chanceOfRainInPercentTextView.text = it.durationOfRain.toString()
-                    binding.humidityInPercentTextView.text = it.humidity.toString()
-                    binding.currentWeekDay.text = it.dayOfWeek
-                    binding.currentMonthAndNumberOfMonth.text = it.date
+                    binding.progressBar.visibility = View.GONE
+                    binding.content.visibility = View.VISIBLE
+                    updateUiState(it.weatherView)
                 }
             }
         }
-        viewModel.fetchWeather()
+    }
+
+    private fun updateUiState(weatherView: WeatherPageView) {
+        binding.currentTemperature.text = weatherView.temp.toString()
+        binding.currentWeather.text = weatherView.description
+        binding.windSpeedTextView.text =
+            getString(R.string.wind_speed_format, weatherView.speed.toString())
+        binding.mercuryPressureTextView.text =
+            getString(R.string.mercury_pressure_format, weatherView.pressure.toString())
+        binding.chanceOfRainInPercentTextView.text =
+            getString(R.string.cloudiness_in_percent_format, weatherView.durationOfRain.toString())
+        binding.humidityInPercentTextView.text =
+            getString(R.string.humidity_in_percent_format, weatherView.humidity.toString())
+        binding.currentWeekDay.text = weatherView.dayOfWeek
+        binding.currentMonthAndNumberOfMonth.text = weatherView.date
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateLocation()
     }
 
     private fun showToast(text: String) {
