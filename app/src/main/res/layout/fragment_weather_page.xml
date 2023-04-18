@@ -22,11 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            tools:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/content"
@@ -47,13 +47,13 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="top"
                 android:lineSpacingExtra="-5sp"
-                tools:text="current weather"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/materialDivider"
                 app:layout_constraintEnd_toEndOf="@+id/currentTemperature"
                 app:layout_constraintStart_toStartOf="@+id/currentTemperature"
-                app:layout_constraintTop_toBottomOf="@id/currentTemperature" />
+                app:layout_constraintTop_toBottomOf="@id/currentTemperature"
+                tools:text="current weather" />
 
             <TextView
                 android:id="@+id/currentTemperature"
@@ -62,13 +62,13 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="top"
                 android:lineSpacingExtra="-22sp"
-                tools:text="temp"
                 android:textColor="@color/white"
                 android:textSize="72sp"
                 app:layout_constraintBottom_toTopOf="@+id/currentWeather"
                 app:layout_constraintEnd_toEndOf="@+id/currentMonthAndNumberOfMonth"
                 app:layout_constraintStart_toStartOf="@+id/currentWeekDay"
-                app:layout_constraintTop_toBottomOf="@id/separatingLineImageView" />
+                app:layout_constraintTop_toBottomOf="@id/separatingLineImageView"
+                tools:text="temp" />
 
             <TextView
                 android:id="@+id/currentWeekDay"
@@ -93,12 +93,12 @@
                 android:layout_marginBottom="@dimen/default_margin"
                 android:fontFamily="@font/poppins_regular"
                 android:lineSpacingExtra="-5sp"
-                tools:text="date"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/currentTemperature"
                 app:layout_constraintStart_toEndOf="@+id/separatingLineImageView"
-                app:layout_constraintTop_toBottomOf="@id/currentWeatherInPicture" />
+                app:layout_constraintTop_toBottomOf="@id/currentWeatherInPicture"
+                tools:text="date" />
 
             <ImageView
                 android:id="@+id/degreeImageView"
@@ -282,8 +282,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:listitem="@layout/item_weather" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

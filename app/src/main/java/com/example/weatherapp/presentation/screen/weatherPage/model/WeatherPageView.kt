@@ -8,7 +8,7 @@ data class WeatherPageView(
     val pressure: Int,
     val humidity: Int,
     val speed: Double,
-    val dayOfWeek: String? = "Суббота",
+    val dayOfWeek: String? = "суббота",
     val date: String? = "Апр 15",
     val durationOfRain: Double,
     val cloudiness: Int
