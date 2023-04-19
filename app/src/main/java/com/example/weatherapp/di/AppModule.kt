@@ -18,9 +18,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    const val BASE_URL = "https://api.openweathermap.org"
-
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient = run {
@@ -37,7 +34,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
@@ -49,5 +45,4 @@ object AppModule {
     @Provides
     fun provideWeatherService(retrofit: Retrofit): WeatherService =
         retrofit.create(WeatherService::class.java)
-
 }

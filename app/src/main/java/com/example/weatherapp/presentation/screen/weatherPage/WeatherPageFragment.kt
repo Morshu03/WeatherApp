@@ -12,6 +12,7 @@ import com.example.weatherapp.databinding.FragmentWeatherPageBinding
 import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageUiState
 import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageView
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DateFormat
 import java.util.Calendar
 
 
@@ -55,11 +56,13 @@ class WeatherPageFragment : Fragment() {
         binding.mercuryPressureTextView.text =
             getString(R.string.mercury_pressure_format, weatherView.pressure.toString())
         binding.chanceOfRainInPercentTextView.text =
-            getString(R.string.cloudiness_in_percent_format, weatherView.durationOfRain.toString())
+            getString(R.string.cloudiness_in_percent_format, weatherView.cloudiness.toString())
         binding.humidityInPercentTextView.text =
             getString(R.string.humidity_in_percent_format, weatherView.humidity.toString())
-        binding.currentWeekDay.text = weatherView.dayOfWeek.toString()
-        binding.currentMonthAndNumberOfMonth.text = weatherView.date.toString()
+        binding.currentWeekDay.text = weatherView.dayOfWeek
+        binding.currentMonthAndNumberOfMonth.text = weatherView.date
+        binding.currentWeekDayOverRecyclerView.text = weatherView.dayOfWeek
+        binding.currentMonthAndNumberOfMonthOverRecyclerView.text = weatherView.date
     }
 
     override fun onResume() {

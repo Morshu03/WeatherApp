@@ -9,10 +9,14 @@ import com.example.weatherapp.data.repository.LocationRepository
 import com.example.weatherapp.data.repository.WeatherRepository
 import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageUiState
 import com.example.weatherapp.util.CurrentWeatherMapper.toView
+import com.example.weatherapp.util.DateUtil.formatCurrentDay
+import com.example.weatherapp.util.DateUtil.formatDayOfWeek
 import com.example.weatherapp.util.RequestResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
+
 
 @HiltViewModel
 class WeatherPageViewModel @Inject constructor(
@@ -39,16 +43,17 @@ class WeatherPageViewModel @Inject constructor(
 
     fun fetchWeather(location: Location) {
         viewModelScope.launch() {
-            // получить геолокацию (прогуглить как получить application Context в viewmodel)
             when (val response = repository.getCurrentWeatherConditions(
                 lat = location.lat,
                 lon = location.lon
             )) {
                 is RequestResult.Success -> {
-                    // получить и отформатировать даты
+                    val date = LocalDate.now()
+                    val currentDate = date.formatCurrentDay()
+                    val dayOfWeek = date.formatDayOfWeek()
                     weatherUiStateLiveData.postValue(
                         WeatherPageUiState.Success(
-                            weatherView = response.data.toView()
+                            weatherView = response.data.toView(currentDate, dayOfWeek)
                         )
                     )
                 }

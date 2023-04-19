@@ -2,6 +2,7 @@ package com.example.weatherapp.data.repository
 
 import com.example.weatherapp.data.entity.CurrentWeatherResponse
 import com.example.weatherapp.data.api.WeatherService
+import com.example.weatherapp.data.entity.HourlyWeatherResponse
 import com.example.weatherapp.util.RequestResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,7 +32,22 @@ class WeatherRepository @Inject constructor(
         }
     }
 
-    companion object {
-        private const val API_KEY = "e5562ca7f88c0374eae70dd64cdf15a2"
+    suspend fun getHourlyWeatherConditions(lat: Double, lon: Double): RequestResult<HourlyWeatherResponse?> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val result = weatherService.getHourlyWeatherConditions(
+                    lat = lat,
+                    lon = lon
+                )
+                if (result.isSuccessful) {
+                    result.body()?.let {
+                        return@withContext RequestResult.Success(it)
+                    }
+                }
+                return@withContext RequestResult.Error(result.message())
+            } catch (e: java.lang.Exception) {
+                return@withContext RequestResult.Error(e.message)
+            }
+        }
     }
 }

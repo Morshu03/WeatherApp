@@ -20,7 +20,7 @@ class LocationRepository @Inject constructor(private val application: Applicatio
     private val mFusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
 
     @SuppressLint("MissingPermission")
-    suspend fun updateLocation() {
+    fun updateLocation() {
         if (checkPermission()) {
             mFusedLocationClient.lastLocation.addOnCompleteListener  { task ->
                 val location: android.location.Location? = task.result

@@ -9,4 +9,6 @@
     <string name="cloudiness">Облачность</string>
     <string name="humidity_in_percent">%</string>
     <string name="humidity">Влажность</string>
+    <string name="week_day">%s</string>
+    <string name="date">%s%s</string>
 </resources>
