@@ -1,4 +1,4 @@
-package com.example.weatherapp.presentation.screen.weatherPage.model
+package com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather
 
 
 sealed class WeatherPageUiState {

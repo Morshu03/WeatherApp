@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentWeatherPageBinding
-import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageUiState
-import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageView
+import com.example.weatherapp.presentation.screen.weatherPage.adapter.WeatherAdapter
+import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
+import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageView
+import com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeather.HourlyPageUiState
+import com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeather.HourlyWeather
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DateFormat
-import java.util.Calendar
 
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class WeatherPageFragment : Fragment() {
     private val viewModel: WeatherPageViewModel by viewModels()
     private var _binding: FragmentWeatherPageBinding? = null
     private val binding get() = _binding!!
+    private val adapter = WeatherAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,20 @@ class WeatherPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.adapter = adapter
+
+        viewModel.hourlyUiStateLiveData.observe(viewLifecycleOwner){
+            when(it){
+                is HourlyPageUiState.Error -> {
+                    showToast(it.message)
+                }
+                is HourlyPageUiState.Success -> {
+                    adapter.setList(newWeatherList = it.hourlyView.hourlyList!!.toMutableList())
+                }
+            }
+        }
+
         viewModel.weatherUiStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is WeatherPageUiState.Error -> {
@@ -42,13 +59,13 @@ class WeatherPageFragment : Fragment() {
                 is WeatherPageUiState.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.content.visibility = View.VISIBLE
-                    updateUiState(it.weatherView)
+                    updateCurrentWeatherUiState(it.weatherView)
                 }
             }
         }
     }
 
-    private fun updateUiState(weatherView: WeatherPageView) {
+    private fun updateCurrentWeatherUiState(weatherView: WeatherPageView) {
         binding.currentTemperature.text = weatherView.temp.toString()
         binding.currentWeather.text = weatherView.description
         binding.windSpeedTextView.text =
@@ -64,6 +81,7 @@ class WeatherPageFragment : Fragment() {
         binding.currentWeekDayOverRecyclerView.text = weatherView.dayOfWeek
         binding.currentMonthAndNumberOfMonthOverRecyclerView.text = weatherView.date
     }
+
 
     override fun onResume() {
         super.onResume()

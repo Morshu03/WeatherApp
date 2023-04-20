@@ -9,13 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.R
-import com.example.weatherapp.presentation.screen.weatherPage.model.HourlyWeatherView
+import com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeather.HourlyWeather
 
-class WeatherAdapter(private var weatherList: List<HourlyWeatherView> = listOf()) :
+class WeatherAdapter(private var weatherList: List<HourlyWeather> = listOf()) :
     RecyclerView.Adapter<WeatherAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("ResourceType")
-        fun bind(hourlyWeatherView: HourlyWeatherView) {
+        fun bind(hourlyWeather: HourlyWeather) {
             val timeText: TextView = itemView.findViewById(R.id.time)
             val minimumOfTemperatureInCurrentHourText: TextView =
                 itemView.findViewById(R.id.minimumOfTemperatureInCurrentHour)
@@ -26,12 +26,12 @@ class WeatherAdapter(private var weatherList: List<HourlyWeatherView> = listOf()
             val weatherDependingOnTheTimeInPicture: ImageView =
                 itemView.findViewById(R.id.weatherDependingOnTheTimeInPicture)
 
-            timeText.text = hourlyWeatherView.timeText
-            minimumOfTemperatureInCurrentHourText.text = hourlyWeatherView.minimumOfTemperatureInCurrentHourText
-            maximumOfTemperatureInCurrentHourText.text = hourlyWeatherView.maximumOfTemperatureInCurrentHourText
-            precipitationIPercentOnHourText.text = hourlyWeatherView.precipitationIPercentOnHourText
+            timeText.text = hourlyWeather.timeText
+            minimumOfTemperatureInCurrentHourText.text = hourlyWeather.minimumOfTemperatureInCurrentHourText
+            maximumOfTemperatureInCurrentHourText.text = hourlyWeather.maximumOfTemperatureInCurrentHourText
+            precipitationIPercentOnHourText.text = hourlyWeather.precipitationIPercentOnHourText
 
-            Glide.with(itemView.context).load(hourlyWeatherView.weatherDependingOnTheTimeInPicture).centerCrop()
+            Glide.with(itemView.context).load(hourlyWeather.weatherDependingOnTheTimeInPicture).centerCrop()
                 .into(weatherDependingOnTheTimeInPicture)
         }
     }
@@ -48,5 +48,9 @@ class WeatherAdapter(private var weatherList: List<HourlyWeatherView> = listOf()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(weatherList[position])
+    }
+    fun setList(newWeatherList: MutableList<HourlyWeather>) {
+        weatherList = newWeatherList
+        notifyDataSetChanged()
     }
 }

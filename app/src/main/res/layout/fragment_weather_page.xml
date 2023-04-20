@@ -159,7 +159,7 @@
             <TextView
                 android:id="@+id/windSpeedTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_regular"
@@ -172,7 +172,7 @@
             <TextView
                 android:id="@+id/windTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/wind"
@@ -194,9 +194,9 @@
             <TextView
                 android:id="@+id/mercuryPressureTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/mercury_pressure"
                 android:textColor="@color/white"
@@ -207,7 +207,7 @@
             <TextView
                 android:id="@+id/pressureTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/pressure"
@@ -229,7 +229,7 @@
             <TextView
                 android:id="@+id/chanceOfRainInPercentTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:layout_marginTop="@dimen/default_margin"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/cloudiness_in_percent"
@@ -241,7 +241,7 @@
             <TextView
                 android:id="@+id/cloudinessTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:layout_marginEnd="42dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/cloudiness"
@@ -263,8 +263,8 @@
             <TextView
                 android:id="@+id/humidityInPercentTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
-                android:layout_marginTop="@dimen/default_margin"
+                android:layout_height="16dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/humidity_in_percent"
                 android:textColor="@color/white"
@@ -275,7 +275,7 @@
             <TextView
                 android:id="@+id/humidityTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:layout_marginBottom="@dimen/default_margin"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/humidity"

@@ -1,8 +1,7 @@
 package com.example.weatherapp.util
 
 import com.example.weatherapp.data.entity.CurrentWeatherResponse
-import com.example.weatherapp.presentation.screen.weatherPage.model.WeatherPageView
-import java.time.DayOfWeek
+import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageView
 import javax.inject.Singleton
 
 @Singleton

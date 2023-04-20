@@ -8,7 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface WeatherService {
-    @GET("https://api.openweathermap.org/data/2.5/weather")
+    @GET("data/2.5/weather")
     suspend fun getCurrentWeatherConditions(
         @Query("appid") apiKey: String = "e5562ca7f88c0374eae70dd64cdf15a2",
         @Query("lat") lat: Double,
@@ -17,7 +17,7 @@ interface WeatherService {
         @Query("units") units: String = "metric"
     ): Response<CurrentWeatherResponse>
 
-    @GET("https://pro.openweathermap.org/data/2.5/forecast/hourly")
+    @GET("data/2.5/forecast")
     suspend fun getHourlyWeatherConditions(
         @Query("appid") apiKey: String = "e5562ca7f88c0374eae70dd64cdf15a2",
         @Query("lat") lat: Double,
@@ -25,4 +25,5 @@ interface WeatherService {
         @Query("lang") lang: String = "ru",
         @Query("units") units: String = "metric"
     ): Response<HourlyWeatherResponse>
+
 }

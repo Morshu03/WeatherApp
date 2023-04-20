@@ -1,14 +1,16 @@
 package com.example.weatherapp.data.entity
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
 
 data class HourlyWeatherResponse(
-    val weather: List<Weather>,
-    val main: Main,
-    val rain: Rain,
-    val date: Date
+    val list: List<HourResponse>
 ) {
+    data class HourResponse(
+        val weather: List<Weather>,
+        val main: Main,
+        val rain: Rain,
+        val dt: Long
+    )
 
     data class Weather(
         val main: String,
@@ -26,10 +28,5 @@ data class HourlyWeatherResponse(
     data class Rain(
         @SerializedName("1h")
         val durationOfRain: Double
-    )
-
-    data class Date(
-        @SerializedName("dt_txt")
-        val date: java.util.Date
     )
 }

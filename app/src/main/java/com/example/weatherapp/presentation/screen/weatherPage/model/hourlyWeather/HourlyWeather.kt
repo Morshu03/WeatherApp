@@ -1,8 +1,6 @@
-package com.example.weatherapp.presentation.screen.weatherPage.model
+package com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeather
 
-import android.widget.ImageView
-
-data class HourlyWeatherView(
+data class HourlyWeather(
     val timeText: String,
     val minimumOfTemperatureInCurrentHourText: String,
     val maximumOfTemperatureInCurrentHourText: String,
