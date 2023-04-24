@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageSwitcher
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeathe
 class WeatherAdapter(private var weatherList: List<HourlyWeather> = listOf()) :
     RecyclerView.Adapter<WeatherAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("ResourceType")
+        val res = itemView.resources
         fun bind(hourlyWeather: HourlyWeather) {
             val timeText: TextView = itemView.findViewById(R.id.time)
             val minimumOfTemperatureInCurrentHourText: TextView =
@@ -27,12 +28,12 @@ class WeatherAdapter(private var weatherList: List<HourlyWeather> = listOf()) :
                 itemView.findViewById(R.id.weatherDependingOnTheTimeInPicture)
 
             timeText.text = hourlyWeather.timeText
-            minimumOfTemperatureInCurrentHourText.text = hourlyWeather.minimumOfTemperatureInCurrentHourText
-            maximumOfTemperatureInCurrentHourText.text = hourlyWeather.maximumOfTemperatureInCurrentHourText
-            precipitationIPercentOnHourText.text = hourlyWeather.precipitationIPercentOnHourText
-
-            Glide.with(itemView.context).load(hourlyWeather.weatherDependingOnTheTimeInPicture).centerCrop()
-                .into(weatherDependingOnTheTimeInPicture)
+            minimumOfTemperatureInCurrentHourText.text = hourlyWeather.minTemp.toInt().toString()
+            maximumOfTemperatureInCurrentHourText.text = hourlyWeather.maxTemp.toInt().toString()
+            //timeText.text = String.format(res.getString(R.string.time), hourlyWeather.timeText)
+            precipitationIPercentOnHourText.text =
+                String.format(res.getString(R.string.duration_of_rain), hourlyWeather.precipitation.toInt().toString())
+            weatherDependingOnTheTimeInPicture.setImageResource(hourlyWeather.weatherIconId)
         }
     }
 
@@ -49,6 +50,7 @@ class WeatherAdapter(private var weatherList: List<HourlyWeather> = listOf()) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(weatherList[position])
     }
+
     fun setList(newWeatherList: MutableList<HourlyWeather>) {
         weatherList = newWeatherList
         notifyDataSetChanged()

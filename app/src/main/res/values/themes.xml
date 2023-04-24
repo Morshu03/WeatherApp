@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SearchViewTextTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/wet_asphalt</item>
+    </style>
 </resources>

@@ -1,16 +1,17 @@
-package com.example.weatherapp.presentation.screen
+package com.example.weatherapp.presentation.screen.manageLocation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView.OnQueryTextListener
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentManageLocationBinding
 import com.example.weatherapp.databinding.FragmentWeatherBinding
 
-class ManageLocationFragment : Fragment() {
+class ManageLocationFragment : Fragment(), OnQueryTextListener {
     private var _binding: FragmentManageLocationBinding? = null
     private val binding get() = _binding!!
 
@@ -27,5 +28,13 @@ class ManageLocationFragment : Fragment() {
         binding.arrowBack.setOnClickListener {
             findNavController().navigate(R.id.action_manageLocationFragment_to_weatherFragment)
         }
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        TODO("Not yet implemented")
     }
 }

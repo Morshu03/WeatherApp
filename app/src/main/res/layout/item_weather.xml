@@ -15,6 +15,7 @@
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/white"
         android:textSize="16sp"
+        android:text="@string/time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,50 +23,55 @@
 
     <ImageView
         android:id="@+id/weatherDependingOnTheTimeInPicture"
-        android:layout_width="20dp"
-        android:layout_height="19dp"
-        android:src="@drawable/cloud_angled_rain"
+        android:layout_width="24dp"
+        android:layout_height="23dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginHorizontal="12dp"
         app:layout_constraintTop_toBottomOf="@id/time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="9dp"/>
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/minimumOfTemperatureInCurrentHour"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginEnd="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
         android:fontFamily="@font/poppins_regular"
+        android:text="@string/min_temp"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/separatingLineTemperature"
         app:layout_constraintEnd_toStartOf="@+id/separatingLineTemperature"
-        app:layout_constraintTop_toTopOf="@+id/separatingLineTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/weatherDependingOnTheTimeInPicture"
         tools:text="20" />
 
-    <TextView
+    <ImageView
         android:id="@+id/separatingLineTemperature"
-        android:layout_width="6dp"
+        android:layout_width="8dp"
         android:layout_height="14dp"
         android:layout_marginTop="7dp"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/white"
-        tools:text="/"
-        app:layout_constraintEnd_toEndOf="@+id/weatherDependingOnTheTimeInPicture"
-        app:layout_constraintStart_toStartOf="@+id/weatherDependingOnTheTimeInPicture"
+        android:scaleType="centerCrop"
+        android:src="@drawable/slash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weatherDependingOnTheTimeInPicture" />
 
     <TextView
         android:id="@+id/maximumOfTemperatureInCurrentHour"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_regular"
+        android:text="@string/max_temp"
         android:textColor="@color/white"
         android:textSize="12sp"
-        tools:text="24"
         app:layout_constraintBottom_toBottomOf="@+id/separatingLineTemperature"
         app:layout_constraintStart_toEndOf="@+id/separatingLineTemperature"
-        app:layout_constraintTop_toTopOf="@+id/separatingLineTemperature"/>
+        app:layout_constraintTop_toBottomOf="@+id/weatherDependingOnTheTimeInPicture"
+        tools:text="24" />
 
     <ImageView
         android:id="@+id/minimumTemperatureDegree"
@@ -85,19 +91,22 @@
         app:layout_constraintStart_toEndOf="@+id/maximumOfTemperatureInCurrentHour"
         app:layout_constraintTop_toTopOf="@+id/maximumOfTemperatureInCurrentHour" />
 
+
     <TextView
         android:id="@+id/precipitationIPercentOnHour"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
-        tools:text="74% rain"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/duration_of_rain"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:fontFamily="@font/poppins_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/separatingLineTemperature"/>
+        app:layout_constraintTop_toBottomOf="@+id/separatingLineTemperature"
+        tools:text="3ч" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

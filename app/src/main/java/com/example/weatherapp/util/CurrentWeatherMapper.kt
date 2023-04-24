@@ -16,12 +16,10 @@ object CurrentWeatherMapper {
         humidity = this?.main?.humidity ?: 0,
         weatherType = this?.weather?.firstOrNull()?.main ?: "",
         speed = this?.wind?.speed ?: 0.0,
-        durationOfRain = this?.rain?.durationOfRain ?: 0.0,
         cloudiness = this?.clouds?.cloudiness ?: 0,
         date = currentDate,
         dayOfWeek = dayOfWeek,
-        description = this?.weather?.firstOrNull()?.description ?: "",
-        icon = this?.weather?.firstOrNull()?.icon ?: 0
+        description = this?.weather?.firstOrNull()?.description ?: ""
     )
 
 }

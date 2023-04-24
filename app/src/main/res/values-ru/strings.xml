@@ -11,4 +11,11 @@
     <string name="humidity">Влажность</string>
     <string name="week_day">%s</string>
     <string name="date">%s%s</string>
+    <string name="time">Время</string>
+    <string name="min_temp">мин темп</string>
+    <string name="max_temp">макс темп</string>
+    <string name="precipitation">часов</string>
+    <string name="duration_of_rain">Дождь: %sч%n</string>
+    <string name="manage_location">Управление местоположением</string>
+    <string name="search_view_default_text">Название вашего города</string>
 </resources>

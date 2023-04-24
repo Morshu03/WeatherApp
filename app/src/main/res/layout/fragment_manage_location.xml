@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/weather_fragment_background"
-    tools:context=".presentation.screen.ManageLocationFragment">
+    tools:context=".presentation.screen.manageLocation.ManageLocationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/manageLocationToolbar"
@@ -22,14 +22,13 @@
             android:id="@+id/manageLocationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/arrow_back"
-            tools:text="Manage location" />
+            android:text="@string/manage_location" />
 
         <ImageButton
             android:id="@+id/arrow_back"
@@ -48,14 +47,16 @@
             android:layout_height="32dp"
             android:layout_marginTop="37dp"
             android:inputType="text"
-            android:queryHint="Search Your City"
-            android:queryBackground="@color/white"
+            android:queryHint="@string/search_view_default_text"
+            android:theme="@style/SearchViewTextTheme"
+            android:searchIcon="@drawable/magnifier"
             android:iconifiedByDefault="false"
             android:layout_marginHorizontal="@dimen/default_margin"
             android:background="@drawable/search_view_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/manageLocationTextView" />
+            app:layout_constraintTop_toBottomOf="@id/manageLocationTextView"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

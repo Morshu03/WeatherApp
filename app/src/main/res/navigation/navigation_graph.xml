@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_weather_page" />
     <fragment
         android:id="@+id/manageLocationFragment"
-        android:name="com.example.weatherapp.presentation.screen.ManageLocationFragment"
+        android:name="com.example.weatherapp.presentation.screen.manageLocation.ManageLocationFragment"
         android:label="fragment_manage_location"
         tools:layout="@layout/fragment_manage_location" >
         <action

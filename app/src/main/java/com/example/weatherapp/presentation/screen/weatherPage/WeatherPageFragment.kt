@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
@@ -26,6 +27,7 @@ class WeatherPageFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter = WeatherAdapter()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +38,9 @@ class WeatherPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(activity)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
 
         viewModel.hourlyUiStateLiveData.observe(viewLifecycleOwner){
