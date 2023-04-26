@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
@@ -14,8 +13,6 @@ import com.example.weatherapp.databinding.FragmentWeatherPageBinding
 import com.example.weatherapp.presentation.screen.weatherPage.adapter.WeatherAdapter
 import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
 import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageView
-import com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeather.HourlyPageUiState
-import com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeather.HourlyWeather
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -43,17 +40,6 @@ class WeatherPageFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
 
-        viewModel.hourlyUiStateLiveData.observe(viewLifecycleOwner){
-            when(it){
-                is HourlyPageUiState.Error -> {
-                    showToast(it.message)
-                }
-                is HourlyPageUiState.Success -> {
-                    adapter.setList(newWeatherList = it.hourlyView.hourlyList!!.toMutableList())
-                }
-            }
-        }
-
         viewModel.weatherUiStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is WeatherPageUiState.Error -> {
@@ -64,6 +50,7 @@ class WeatherPageFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     binding.content.visibility = View.VISIBLE
                     updateCurrentWeatherUiState(it.weatherView)
+                    adapter.setList(it.hourlyPageView.hourlyList?.toMutableList() ?: mutableListOf())
                 }
             }
         }

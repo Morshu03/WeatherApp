@@ -2,6 +2,7 @@ package com.example.weatherapp.data.api
 
 import com.example.weatherapp.data.entity.CurrentWeatherResponse
 import com.example.weatherapp.data.entity.HourlyWeatherResponse
+import com.example.weatherapp.data.entity.ManageLocationResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -25,5 +26,11 @@ interface WeatherService {
         @Query("lang") lang: String = "ru",
         @Query("units") units: String = "metric"
     ): Response<HourlyWeatherResponse>
+
+    @GET("geo/1.0/direct")
+    suspend fun getCityName(
+        @Query("appid") apiKey: String = "e5562ca7f88c0374eae70dd64cdf15a2",
+        @Query("q") cityName: String
+    ): Response<ManageLocationResponse>
 
 }

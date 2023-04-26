@@ -8,13 +8,13 @@ import com.example.weatherapp.data.entity.Location
 import com.example.weatherapp.data.repository.LocationRepository
 import com.example.weatherapp.data.repository.WeatherRepository
 import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
-import com.example.weatherapp.presentation.screen.weatherPage.model.hourlyWeather.HourlyPageUiState
 import com.example.weatherapp.util.CurrentWeatherMapper.toView
 import com.example.weatherapp.util.DateUtil.formatCurrentDay
 import com.example.weatherapp.util.DateUtil.formatDayOfWeek
 import com.example.weatherapp.util.HourlyWeatherMapper.toView
 import com.example.weatherapp.util.RequestResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
@@ -26,12 +26,10 @@ class WeatherPageViewModel @Inject constructor(
     private val locationRepository: LocationRepository
 ) : ViewModel() {
     val weatherUiStateLiveData: MutableLiveData<WeatherPageUiState> = MutableLiveData()
-    val hourlyUiStateLiveData: MutableLiveData<HourlyPageUiState> = MutableLiveData()
 
     private val locationObserver = Observer<Location?> { location ->
         location?.let {
             fetchWeather(it)
-            fetchHourlyWeather(it)
         }
     }
 
@@ -47,52 +45,32 @@ class WeatherPageViewModel @Inject constructor(
 
     fun fetchWeather(location: Location) {
         viewModelScope.launch() {
-            when (val response = repository.getCurrentWeatherConditions(
-                lat = location.lat,
-                lon = location.lon
-            )) {
-                is RequestResult.Success -> {
-                    val date = LocalDate.now()
-                    val currentDate = date.formatCurrentDay()
-                    val dayOfWeek = date.formatDayOfWeek()
-                    weatherUiStateLiveData.postValue(
-                        WeatherPageUiState.Success(
-                            weatherView = response.data.toView(currentDate, dayOfWeek)
-                        )
-                    )
-                }
-
-                is RequestResult.Error -> {
-                    weatherUiStateLiveData.postValue(
-                        WeatherPageUiState.Error(
-                            message = response.message ?: ""
-                        )
-                    )
-                }
+            val currentWeatherResponse = async {
+                repository.getCurrentWeatherConditions(
+                    lat = location.lat,
+                    lon = location.lon
+                )
             }
-        }
-    }
-
-    fun fetchHourlyWeather(location: Location){
-        viewModelScope.launch(){
-            when(val response = repository.getHourlyWeatherConditions(
-                lat = location.lat,
-                lon = location.lon
-            )) {
-                is RequestResult.Success -> {
-                    hourlyUiStateLiveData.postValue(
-                        HourlyPageUiState.Success(
-                            hourlyView = response.data.toView()
-                        )
+            val hourlyWeatherResponse = async {
+                repository.getHourlyWeatherConditions(
+                    lat = location.lat,
+                    lon = location.lon
+                )
+            }
+            if (hourlyWeatherResponse.await() is RequestResult.Success && currentWeatherResponse.await() is RequestResult.Success) {
+                val date = LocalDate.now()
+                val currentDate = date.formatCurrentDay()
+                val dayOfWeek = date.formatDayOfWeek()
+                weatherUiStateLiveData.postValue(
+                    WeatherPageUiState.Success(
+                        weatherView = (currentWeatherResponse.await() as? RequestResult.Success)?.data.toView(currentDate, dayOfWeek),
+                        hourlyPageView = (hourlyWeatherResponse.await() as? RequestResult.Success)?.data.toView()
                     )
-                }
-                is RequestResult.Error -> {
-                    hourlyUiStateLiveData.postValue(
-                        HourlyPageUiState.Error(
-                            message = response.message ?: ""
-                        )
-                    )
-                }
+                )
+            } else {
+                WeatherPageUiState.Error(
+                    message = (currentWeatherResponse.await() as? RequestResult.Success)?.message ?: ""
+                )
             }
         }
     }
