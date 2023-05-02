@@ -3,7 +3,7 @@ package com.example.weatherapp.data.repository
 import com.example.weatherapp.data.entity.CurrentWeatherResponse
 import com.example.weatherapp.data.api.WeatherService
 import com.example.weatherapp.data.entity.HourlyWeatherResponse
-import com.example.weatherapp.data.entity.ManageLocationResponse
+import com.example.weatherapp.data.entity.GeocodingResponse
 import com.example.weatherapp.util.RequestResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -52,7 +52,7 @@ class WeatherRepository @Inject constructor(
         }
     }
 
-    suspend fun getCityName(cityName: String): RequestResult<ManageLocationResponse?> {
+    suspend fun getCityName(cityName: String): RequestResult<List<GeocodingResponse.NameResponse>?> {
         return withContext(Dispatchers.IO) {
             try {
                 val result = weatherService.getCityName(cityName = cityName)

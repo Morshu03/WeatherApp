@@ -22,8 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherPageViewModel @Inject constructor(
-    private val repository: WeatherRepository,
-    private val locationRepository: LocationRepository
+    private val repository: WeatherRepository, private val locationRepository: LocationRepository
 ) : ViewModel() {
     val weatherUiStateLiveData: MutableLiveData<WeatherPageUiState> = MutableLiveData()
 
@@ -47,24 +46,24 @@ class WeatherPageViewModel @Inject constructor(
         viewModelScope.launch() {
             val currentWeatherResponse = async {
                 repository.getCurrentWeatherConditions(
-                    lat = location.lat,
-                    lon = location.lon
+                    lat = location.lat, lon = location.lon
                 )
             }
             val hourlyWeatherResponse = async {
                 repository.getHourlyWeatherConditions(
-                    lat = location.lat,
-                    lon = location.lon
+                    lat = location.lat, lon = location.lon
                 )
             }
-            if (hourlyWeatherResponse.await() is RequestResult.Success && currentWeatherResponse.await() is RequestResult.Success) {
+            if (hourlyWeatherResponse.await() is RequestResult.Success &&
+                currentWeatherResponse.await() is RequestResult.Success) {
                 val date = LocalDate.now()
                 val currentDate = date.formatCurrentDay()
                 val dayOfWeek = date.formatDayOfWeek()
                 weatherUiStateLiveData.postValue(
                     WeatherPageUiState.Success(
-                        weatherView = (currentWeatherResponse.await() as? RequestResult.Success)?.data.toView(currentDate, dayOfWeek),
-                        hourlyPageView = (hourlyWeatherResponse.await() as? RequestResult.Success)?.data.toView()
+                        weatherView = (currentWeatherResponse.await() as? RequestResult.Success)?.data.toView(
+                            currentDate, dayOfWeek
+                        ), hourlyPageView = (hourlyWeatherResponse.await() as? RequestResult.Success)?.data.toView()
                     )
                 )
             } else {
