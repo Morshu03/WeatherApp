@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentManageLocationBinding
 import com.example.weatherapp.presentation.screen.manageLocation.adapter.SearchViewAdapter
+import com.example.weatherapp.presentation.screen.manageLocation.model.CityName
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameUiState
 import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
 import com.example.weatherapp.util.RequestResult
@@ -52,20 +53,20 @@ class ManageLocationFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.fetchCities(newText ?: "")
-                viewModel.citiesUiStateLiveData.observe(viewLifecycleOwner) {
-                    when (it) {
-                        is CityNameUiState.Error -> {
-                            showToast(it.message)
-                        }
-
-                        is CityNameUiState.Success -> {
-                            adapter.setList(it.citiesNamesView.namesCitiesList?.toMutableList() ?: mutableListOf())
-                        }
-                    }
-                }
                 return true
             }
         })
+        viewModel.citiesUiStateLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is CityNameUiState.Error -> {
+                    showToast(it.message)
+                }
+
+                is CityNameUiState.Success -> {
+                    adapter.setList(it.citiesNamesView.namesCitiesList?.toMutableList() ?: mutableListOf())
+                }
+            }
+        }
     }
 
     private fun showToast(text: String) {

@@ -9,7 +9,8 @@ object CityNameViewMapper {
     fun List<GeocodingResponse.NameResponse>?.toView() = CityNameView(
         namesCitiesList = this?.map {
              CityName(
-                 name = it.name.toString()
+                 name = it.name.toString(),
+                 country = it.country.toString()
              )
         }
     )

@@ -9,7 +9,8 @@ data class GeocodingResponse(
     data class NameResponse(
         val name: String?,
         @SerializedName("local_name")
-        val localNames: LocalNames?
+        val localNames: LocalNames?,
+        val country: String?
     )
 
     data class LocalNames(

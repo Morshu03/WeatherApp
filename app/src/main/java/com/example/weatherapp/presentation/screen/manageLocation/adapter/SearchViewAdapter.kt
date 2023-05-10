@@ -1,8 +1,12 @@
 package com.example.weatherapp.presentation.screen.manageLocation.adapter
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Filter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
@@ -16,17 +20,17 @@ class SearchViewAdapter(private var citiesList: List<CityName> = listOf()) :
         val res = itemView.resources
         fun bind(citiesNames: CityName) {
             val names: TextView = itemView.findViewById(R.id.cityName)
+            val country: TextView = itemView.findViewById(R.id.country)
 
+            country.text = String.format(res.getString(R.string.country), citiesNames.country)
             names.text = String.format(res.getString(R.string.city_name), citiesNames.name)
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_weather, parent, false)
+            .inflate(R.layout.item_city_name_search_view, parent, false)
         return MyViewHolder(view)
     }
-
     override fun getItemCount(): Int {
         return citiesList.size
     }

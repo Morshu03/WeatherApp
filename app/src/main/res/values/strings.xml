@@ -22,4 +22,9 @@
     <string name="manage_location">Manage location</string>
     <string name="search_view_default_text">Search Your City</string>
     <string name="city_name">%s</string>
+    <string name="country">%s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="saved_city_name">saved city name</string>
+    <string name="country_of_saved_city">country of saved city</string>
 </resources>

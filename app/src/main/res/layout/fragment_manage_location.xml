@@ -10,10 +10,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/manageLocationPage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginHorizontal="@dimen/default_margin"
         android:background="@drawable/fragment_manage_location_background"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,12 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
+            android:text="@string/manage_location"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/arrow_back"
-            android:text="@string/manage_location" />
+            app:layout_constraintTop_toTopOf="@+id/arrow_back" />
 
         <ImageButton
             android:id="@+id/arrow_back"
@@ -45,29 +45,42 @@
             android:id="@+id/manageLocationSearchView"
             android:layout_width="match_parent"
             android:layout_height="32dp"
+            android:layout_marginHorizontal="@dimen/default_margin"
             android:layout_marginTop="37dp"
+            android:background="@drawable/search_view_background"
+            android:iconifiedByDefault="false"
             android:inputType="text"
             android:queryHint="@string/search_view_default_text"
-            android:theme="@style/SearchViewTextTheme"
             android:searchIcon="@drawable/magnifier"
-            android:iconifiedByDefault="false"
-            android:layout_marginHorizontal="@dimen/default_margin"
-            android:background="@drawable/search_view_background"
+            android:theme="@style/SearchViewTextTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/manageLocationTextView"/>
+            app:layout_constraintTop_toBottomOf="@id/manageLocationTextView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchViewRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manageLocationSearchView"
             tools:listitem="@layout/item_city_name_search_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:name="com.example.weatherapp.presentation.screen.manageLocationPage.ManageLocationPageFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manageLocationPage"
+        tools:layout="@layout/fragment_manage_location_page" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
