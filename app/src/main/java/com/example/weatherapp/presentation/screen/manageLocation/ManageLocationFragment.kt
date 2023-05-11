@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentManageLocationBinding
 import com.example.weatherapp.presentation.screen.manageLocation.adapter.SearchViewAdapter
+import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameItem
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameUiState
 import com.example.weatherapp.presentation.screen.manageLocation.model.SavedCitiesRecyclerViewInterface
 import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
@@ -75,7 +76,6 @@ class ManageLocationFragment : Fragment(), SavedCitiesRecyclerViewInterface {
         ).show()
     }
 
-    override fun onItemClick(name: String, country: String) {
-
+    override fun onItemClick(cityNameItem: CityNameItem) {
     }
 }

@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
-import com.example.weatherapp.presentation.screen.manageLocation.model.CityName
+import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameItem
 import com.example.weatherapp.presentation.screen.manageLocation.model.SavedCitiesRecyclerViewInterface
 
 class SearchViewAdapter(val recyclerViewInterface: SavedCitiesRecyclerViewInterface) :
     RecyclerView.Adapter<SearchViewAdapter.MyViewHolder>() {
-    private var citiesList: List<CityName> = listOf()
+    private var citiesList: List<CityNameItem> = listOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val res = itemView.resources
-        fun bind(citiesNames: CityName) {
+        fun bind(citiesNames: CityNameItem) {
             val names: TextView = itemView.findViewById(R.id.cityName)
             val country: TextView = itemView.findViewById(R.id.country)
 
@@ -35,11 +35,11 @@ class SearchViewAdapter(val recyclerViewInterface: SavedCitiesRecyclerViewInterf
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(citiesList[position])
         holder.itemView.setOnClickListener{
-            recyclerViewInterface.onItemClick(citiesList[position].name, citiesList[position].country)
+            recyclerViewInterface.onItemClick(citiesList[position])
         }
     }
 
-    fun setList(newCitiesList: MutableList<CityName>) {
+    fun setList(newCitiesList: MutableList<CityNameItem>) {
         citiesList = newCitiesList
         notifyDataSetChanged()
     }

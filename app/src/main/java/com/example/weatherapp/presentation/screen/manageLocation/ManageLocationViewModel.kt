@@ -4,9 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.repository.WeatherRepository
-import com.example.weatherapp.presentation.screen.manageLocation.model.CityName
+import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameItem
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameUiState
-import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameView
 import com.example.weatherapp.util.CityNameViewMapper.toView
 import com.example.weatherapp.util.RequestResult
 import dagger.hilt.android.lifecycle.HiltViewModel
