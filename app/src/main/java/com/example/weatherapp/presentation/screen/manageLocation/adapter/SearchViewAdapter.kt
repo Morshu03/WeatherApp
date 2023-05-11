@@ -1,20 +1,17 @@
 package com.example.weatherapp.presentation.screen.manageLocation.adapter
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Filter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityName
-import okhttp3.internal.format
+import com.example.weatherapp.presentation.screen.manageLocation.model.SavedCitiesRecyclerViewInterface
 
-class SearchViewAdapter(private var citiesList: List<CityName> = listOf()) :
+class SearchViewAdapter(val recyclerViewInterface: SavedCitiesRecyclerViewInterface) :
     RecyclerView.Adapter<SearchViewAdapter.MyViewHolder>() {
+    private var citiesList: List<CityName> = listOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val res = itemView.resources
@@ -37,6 +34,9 @@ class SearchViewAdapter(private var citiesList: List<CityName> = listOf()) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(citiesList[position])
+        holder.itemView.setOnClickListener{
+            recyclerViewInterface.onItemClick(citiesList[position].name, citiesList[position].country)
+        }
     }
 
     fun setList(newCitiesList: MutableList<CityName>) {

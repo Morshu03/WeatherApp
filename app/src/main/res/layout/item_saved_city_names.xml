@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/search_view_item">
+    android:background="@drawable/saved_cities_background">
 
     <TextView
-        android:id="@+id/saved_cityName"
+        android:id="@+id/savedCityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
@@ -36,7 +36,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/saved_cityName"
+        app:layout_constraintStart_toEndOf="@id/savedCityName"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="abc" />
 

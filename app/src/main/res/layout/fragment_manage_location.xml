@@ -10,10 +10,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/manageLocationPage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_margin"
         android:background="@drawable/fragment_manage_location_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -61,26 +61,27 @@
             android:id="@+id/searchViewRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/wet_asphalt"
             android:layout_marginHorizontal="@dimen/default_margin"
             android:layout_marginTop="8dp"
+            android:elevation="16dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manageLocationSearchView"
             tools:listitem="@layout/item_city_name_search_view" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/savedCitiesRecView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manageLocationSearchView"
+            tools:listitem="@layout/item_saved_city_names" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container"
-        android:name="com.example.weatherapp.presentation.screen.manageLocationPage.ManageLocationPageFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/default_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manageLocationPage"
-        tools:layout="@layout/fragment_manage_location_page" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
