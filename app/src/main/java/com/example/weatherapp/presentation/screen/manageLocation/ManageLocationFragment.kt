@@ -13,15 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentManageLocationBinding
 import com.example.weatherapp.presentation.screen.manageLocation.adapter.SearchViewAdapter
-import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameItem
-import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameUiState
-import com.example.weatherapp.presentation.screen.manageLocation.model.SavedCitiesRecyclerViewInterface
-import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
-import com.example.weatherapp.util.RequestResult
+import com.example.weatherapp.presentation.screen.manageLocation.model.CityItem
+import com.example.weatherapp.presentation.screen.manageLocation.model.ManageLocationUiState
+import com.example.weatherapp.presentation.screen.manageLocation.model.SearchClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ManageLocationFragment : Fragment(), SavedCitiesRecyclerViewInterface {
+class ManageLocationFragment : Fragment(), SearchClickListener {
     private var _binding: FragmentManageLocationBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ManageLocationViewModel by viewModels()
@@ -59,12 +57,12 @@ class ManageLocationFragment : Fragment(), SavedCitiesRecyclerViewInterface {
         })
         viewModel.citiesUiStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is CityNameUiState.Error -> {
+                is ManageLocationUiState.Error -> {
                     showToast(it.message)
                 }
 
-                is CityNameUiState.Success -> {
-                    searchViewAdapter.setList(it.citiesNamesView.namesCitiesList?.toMutableList() ?: mutableListOf())
+                is ManageLocationUiState.Success -> {
+                    searchViewAdapter.setList(it.searchCityList?.toMutableList() ?: mutableListOf())
                 }
             }
         }
@@ -76,6 +74,7 @@ class ManageLocationFragment : Fragment(), SavedCitiesRecyclerViewInterface {
         ).show()
     }
 
-    override fun onItemClick(cityNameItem: CityNameItem) {
+    override fun onSearchItemClick(cityNameItem: CityItem) {
+
     }
 }

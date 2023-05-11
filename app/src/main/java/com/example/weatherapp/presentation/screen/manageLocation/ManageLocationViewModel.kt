@@ -4,9 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.repository.WeatherRepository
-import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameItem
-import com.example.weatherapp.presentation.screen.manageLocation.model.CityNameUiState
-import com.example.weatherapp.util.CityNameViewMapper.toView
+import com.example.weatherapp.presentation.screen.manageLocation.model.ManageLocationUiState
+import com.example.weatherapp.util.CityNameViewMapper.toItems
 import com.example.weatherapp.util.RequestResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,7 +16,7 @@ class ManageLocationViewModel @Inject constructor(
     private val repository: WeatherRepository
 ) : ViewModel() {
 
-    val citiesUiStateLiveData: MutableLiveData<CityNameUiState> = MutableLiveData()
+    val citiesUiStateLiveData: MutableLiveData<ManageLocationUiState> = MutableLiveData()
 
     fun fetchCities(cityName: String) {
         viewModelScope.launch() {
@@ -26,15 +25,15 @@ class ManageLocationViewModel @Inject constructor(
             )) {
                 is RequestResult.Success -> {
                     citiesUiStateLiveData.postValue(
-                        CityNameUiState.Success(
-                            citiesNamesView = response.data.toView()
+                        ManageLocationUiState.Success(
+                            searchCityList = response.data.toItems()
                         )
                     )
                 }
 
                 is RequestResult.Error -> {
                     citiesUiStateLiveData.postValue(
-                        CityNameUiState.Error(
+                        ManageLocationUiState.Error(
                             message = response.message ?: ""
                         )
                     )

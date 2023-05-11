@@ -1,5 +1,6 @@
 package com.example.weatherapp.presentation.screen.manageLocation.model
 
-data class CityNameView(
-    val namesCitiesList: List<CityNameItem>?
+data class CityItem(
+    val name: String,
+    val country: String
 )
