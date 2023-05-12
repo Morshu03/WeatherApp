@@ -1,22 +1,28 @@
 package com.example.weatherapp.presentation.screen.manageLocation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView.OnQueryTextListener
+import android.widget.SearchView.VISIBLE
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentManageLocationBinding
+import com.example.weatherapp.presentation.screen.manageLocation.adapter.SavedCitiesAdapter
 import com.example.weatherapp.presentation.screen.manageLocation.adapter.SearchViewAdapter
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityItem
 import com.example.weatherapp.presentation.screen.manageLocation.model.ManageLocationUiState
 import com.example.weatherapp.presentation.screen.manageLocation.model.SearchClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.wait
 
 @AndroidEntryPoint
 class ManageLocationFragment : Fragment(), SearchClickListener {
@@ -24,6 +30,8 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
     private val binding get() = _binding!!
     private val viewModel: ManageLocationViewModel by viewModels()
     private val searchViewAdapter = SearchViewAdapter(this)
+    private val savedCitiesAdapter = SavedCitiesAdapter()
+    private lateinit var citiesList: MutableList<CityItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +49,11 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
         binding.searchViewRecycler.layoutManager = layoutManager
         binding.searchViewRecycler.adapter = searchViewAdapter
 
+        binding.savedCitiesRecView.layoutManager = layoutManager
+        binding.savedCitiesRecView.adapter = savedCitiesAdapter
+        savedCitiesAdapter.setList(citiesList)
+        binding.savedCitiesRecView.visibility = View.VISIBLE
+
         binding.arrowBack.setOnClickListener {
             findNavController().navigate(R.id.action_manageLocationFragment_to_weatherFragment)
         }
@@ -52,6 +65,9 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.fetchCities(newText ?: "")
+                if (newText != null) {
+                    binding.searchViewRecycler.visibility = View.VISIBLE
+                }
                 return true
             }
         })
