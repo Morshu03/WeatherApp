@@ -18,8 +18,8 @@ class SavedCitiesAdapter: RecyclerView.Adapter<SavedCitiesAdapter.ViewHolder>() 
             val name: TextView = itemView.findViewById(R.id.savedCityName)
             val country : TextView = itemView.findViewById(R.id.countryOfSavedCityName)
 
-            country.text = String.format(res.getString(R.string.country_of_saved_city), citiesNames.country)
-            name.text = String.format(res.getString(R.string.saved_city_name), citiesNames.name)
+            country.text = citiesNames.country
+            name.text = citiesNames.name
         }
     }
 

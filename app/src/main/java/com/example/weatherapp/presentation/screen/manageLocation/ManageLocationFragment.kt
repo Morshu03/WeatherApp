@@ -1,16 +1,12 @@
 package com.example.weatherapp.presentation.screen.manageLocation
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView.OnQueryTextListener
-import android.widget.SearchView.VISIBLE
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +18,6 @@ import com.example.weatherapp.presentation.screen.manageLocation.model.CityItem
 import com.example.weatherapp.presentation.screen.manageLocation.model.ManageLocationUiState
 import com.example.weatherapp.presentation.screen.manageLocation.model.SearchClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.wait
 
 @AndroidEntryPoint
 class ManageLocationFragment : Fragment(), SearchClickListener {
@@ -31,7 +26,7 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
     private val viewModel: ManageLocationViewModel by viewModels()
     private val searchViewAdapter = SearchViewAdapter(this)
     private val savedCitiesAdapter = SavedCitiesAdapter()
-    private lateinit var citiesList: MutableList<CityItem>
+    private val citiesList = mutableListOf<CityItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,14 +39,12 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = LinearLayoutManager(activity)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        binding.searchViewRecycler.layoutManager = layoutManager
+        val searchLayoutManager = LinearLayoutManager(activity)
+        val savedLayoutManager = LinearLayoutManager(activity)
+        binding.searchViewRecycler.layoutManager = searchLayoutManager
         binding.searchViewRecycler.adapter = searchViewAdapter
-
-        binding.savedCitiesRecView.layoutManager = layoutManager
+        binding.savedCitiesRecView.layoutManager = savedLayoutManager
         binding.savedCitiesRecView.adapter = savedCitiesAdapter
-        savedCitiesAdapter.setList(citiesList)
         binding.savedCitiesRecView.visibility = View.VISIBLE
 
         binding.arrowBack.setOnClickListener {
@@ -64,8 +57,10 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.fetchCities(newText ?: "")
-                if (newText != null) {
+                if (newText.isNullOrEmpty()) {
+                    binding.searchViewRecycler.visibility = View.GONE
+                } else {
+                    viewModel.fetchCities(newText)
                     binding.searchViewRecycler.visibility = View.VISIBLE
                 }
                 return true
@@ -91,6 +86,7 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
     }
 
     override fun onSearchItemClick(cityNameItem: CityItem) {
-
+        citiesList.add(cityNameItem)
+        savedCitiesAdapter.setList(citiesList)
     }
 }

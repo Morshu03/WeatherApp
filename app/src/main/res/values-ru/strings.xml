@@ -18,8 +18,4 @@
     <string name="duration_of_rain">Дождь: %sч%n</string>
     <string name="manage_location">Управление местоположением</string>
     <string name="search_view_default_text">Название вашего города</string>
-    <string name="city_name">%s</string>
-    <string name="country">%s</string>
-    <string name="saved_city_name">Название сохранённого города</string>
-    <string name="country_of_saved_city">Страна сохранённого города</string>
 </resources>

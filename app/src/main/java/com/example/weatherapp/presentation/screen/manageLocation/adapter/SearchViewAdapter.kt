@@ -19,8 +19,8 @@ class SearchViewAdapter(val recyclerViewInterface: SearchClickListener) :
             val names: TextView = itemView.findViewById(R.id.cityName)
             val country: TextView = itemView.findViewById(R.id.country)
 
-            country.text = String.format(res.getString(R.string.country), citiesNames.country)
-            names.text = String.format(res.getString(R.string.city_name), citiesNames.name)
+            country.text = citiesNames.country
+            names.text = citiesNames.name
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
