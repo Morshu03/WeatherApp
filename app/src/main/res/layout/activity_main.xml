@@ -16,6 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout="@layout/fragment_weather"
+        tools:layout="@layout/fragment_weather_container"
         app:navGraph="@navigation/navigation_graph"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

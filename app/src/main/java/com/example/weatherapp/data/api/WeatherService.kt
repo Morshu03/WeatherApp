@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.entity.api
+package com.example.weatherapp.data.api
 
 import com.example.weatherapp.data.entity.CurrentWeatherResponse
 import com.example.weatherapp.data.entity.GeocodingResponse

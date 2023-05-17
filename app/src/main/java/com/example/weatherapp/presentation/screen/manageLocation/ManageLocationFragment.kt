@@ -85,8 +85,9 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
         ).show()
     }
 
-    override fun onSearchItemClick(cityNameItem: CityItem) {
-        citiesList.add(cityNameItem)
+    override fun onSearchItemClick(cityItem: CityItem) {
+        citiesList.add(cityItem)
         savedCitiesAdapter.setList(citiesList)
+        binding.manageLocationSearchView.setQuery("", false)
     }
 }

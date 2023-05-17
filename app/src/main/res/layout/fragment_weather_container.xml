@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.screen.weather.WeatherFragment"
+    tools:context=".presentation.screen.weather.WeatherContainerFragment"
     android:background="@drawable/weather_fragment_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:name="com.example.weatherapp.presentation.screen.weatherPage.WeatherPageFragment"
         tools:layout="@layout/fragment_weather_page" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

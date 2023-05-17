@@ -7,19 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
-import com.example.weatherapp.databinding.FragmentWeatherBinding
+import com.example.weatherapp.databinding.FragmentWeatherContainerBinding
+import com.example.weatherapp.presentation.screen.weatherPage.WeatherPageFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class WeatherFragment : Fragment() {
-    private var _binding: FragmentWeatherBinding? = null
+class WeatherContainerFragment : Fragment() {
+    private var _binding: FragmentWeatherContainerBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentWeatherBinding.inflate(inflater, container, false)
+        _binding = FragmentWeatherContainerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,6 +29,11 @@ class WeatherFragment : Fragment() {
         binding.addNewCityButton.setOnClickListener {
             findNavController().navigate(R.id.action_weatherFragment_to_manageLocationFragment)
         }
+        // binding.currentCityName.text =
+        childFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, WeatherPageFragment())
+            .commit()
     }
 
 }

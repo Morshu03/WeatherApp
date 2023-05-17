@@ -5,7 +5,7 @@ import android.app.Application
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MutableLiveData
-import com.example.weatherapp.data.entity.channel.Location
+import com.example.weatherapp.data.entity.Location
 import com.google.android.gms.location.LocationServices
 import javax.inject.Inject
 import javax.inject.Singleton
