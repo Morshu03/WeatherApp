@@ -96,9 +96,9 @@ class ManageLocationFragment : Fragment(), SearchClickListener, SavedItemClickLi
     override fun onSavedItemClick(cityItem: CityItem) {
         findNavController().navigate(R.id.action_manageLocationFragment_to_weatherContainerFragment,
             Bundle().apply {
-                putString("cityNameArgument", cityItem.name)
-                putDouble("latArgument", cityItem.lat)
-                putDouble("lonArgument", cityItem.lon)
+                putString("cityArgument", cityItem.name)
+                putFloat("latArgument", cityItem.lat.toFloat())
+                putFloat("lonArgument", cityItem.lon.toFloat())
             })
     }
 }

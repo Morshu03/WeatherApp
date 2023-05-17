@@ -32,8 +32,8 @@ class WeatherContainerFragment : Fragment() {
         }
 
         val currentCity = requireArguments().getString("cityArgument")
-        val latCity = requireArguments().getDouble("latArgument")
-        val lonCity = requireArguments().getDouble("lonArgument")
+        val latCity = requireArguments().getFloat("latArgument")
+        val lonCity = requireArguments().getFloat("lonArgument")
 
         if(currentCity.isNullOrEmpty()){
             binding.currentCityName.text = ""

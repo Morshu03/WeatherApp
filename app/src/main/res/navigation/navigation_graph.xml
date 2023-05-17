@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/manageLocationFragment">
+    app:startDestination="@id/weatherContainerFragment">
 
     <fragment
         android:id="@+id/weatherContainerFragment"
@@ -11,8 +11,14 @@
         android:label="fragment_weatherContainer"
         tools:layout="@layout/fragment_weather_container">
         <argument
-            android:name="cityNameArgument"
-            app:argType="cityItem"/>
+            android:name="cityArgument"
+            app:argType="string"/>
+        <argument
+            android:name="latArgument"
+            app:argType="float"/>
+        <argument
+            android:name="lonArgument"
+            app:argType="float"/>
         <action
             android:id="@+id/action_weatherContainerFragment_to_manageLocationFragment"
             app:destination="@id/manageLocationFragment" />
