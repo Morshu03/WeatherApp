@@ -30,7 +30,6 @@ class WeatherAdapter(private var weatherList: List<HourlyWeather> = listOf()) :
             timeText.text = hourlyWeather.timeText
             minimumOfTemperatureInCurrentHourText.text = hourlyWeather.minTemp.toInt().toString()
             maximumOfTemperatureInCurrentHourText.text = hourlyWeather.maxTemp.toInt().toString()
-            //timeText.text = String.format(res.getString(R.string.time), hourlyWeather.timeText)
             precipitationIPercentOnHourText.text =
                 String.format(res.getString(R.string.duration_of_rain), hourlyWeather.precipitation.toInt().toString())
             weatherDependingOnTheTimeInPicture.setImageResource(hourlyWeather.weatherIconId)

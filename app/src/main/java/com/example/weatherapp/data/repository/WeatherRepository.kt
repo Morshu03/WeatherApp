@@ -1,7 +1,7 @@
 package com.example.weatherapp.data.repository
 
 import com.example.weatherapp.data.entity.CurrentWeatherResponse
-import com.example.weatherapp.data.api.WeatherService
+import com.example.weatherapp.data.entity.api.WeatherService
 import com.example.weatherapp.data.entity.HourlyWeatherResponse
 import com.example.weatherapp.data.entity.GeocodingResponse
 import com.example.weatherapp.util.RequestResult

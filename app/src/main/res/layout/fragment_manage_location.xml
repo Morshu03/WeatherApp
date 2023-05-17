@@ -52,6 +52,7 @@
             android:inputType="text"
             android:queryHint="@string/search_view_default_text"
             android:searchIcon="@drawable/magnifier"
+            android:closeIcon="@drawable/close"
             android:theme="@style/SearchViewTextTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

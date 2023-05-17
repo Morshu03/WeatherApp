@@ -1,8 +1,8 @@
-package com.example.weatherapp.data.api
+package com.example.weatherapp.data.entity.api
 
 import com.example.weatherapp.data.entity.CurrentWeatherResponse
-import com.example.weatherapp.data.entity.HourlyWeatherResponse
 import com.example.weatherapp.data.entity.GeocodingResponse
+import com.example.weatherapp.data.entity.HourlyWeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

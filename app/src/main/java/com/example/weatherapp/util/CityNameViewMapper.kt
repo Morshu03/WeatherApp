@@ -12,5 +12,4 @@ object CityNameViewMapper {
                  country = it.country.toString()
              )
         }
-
 }

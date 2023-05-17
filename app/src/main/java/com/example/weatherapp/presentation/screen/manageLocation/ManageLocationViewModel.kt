@@ -19,7 +19,7 @@ class ManageLocationViewModel @Inject constructor(
     val citiesUiStateLiveData: MutableLiveData<ManageLocationUiState> = MutableLiveData()
 
     fun fetchCities(cityName: String) {
-        viewModelScope.launch() {
+        viewModelScope.launch {
             when (val response = repository.getCityName(
                 cityName = cityName
             )) {

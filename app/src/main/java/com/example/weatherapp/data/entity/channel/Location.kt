@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.entity
+package com.example.weatherapp.data.entity.channel
 
 data class Location(
     val lat: Double,

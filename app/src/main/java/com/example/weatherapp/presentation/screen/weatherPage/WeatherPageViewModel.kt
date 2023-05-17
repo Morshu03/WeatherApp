@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.data.entity.Location
+import com.example.weatherapp.data.entity.channel.Location
 import com.example.weatherapp.data.repository.LocationRepository
 import com.example.weatherapp.data.repository.WeatherRepository
 import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
