@@ -7,9 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityItem
+import com.example.weatherapp.presentation.screen.manageLocation.model.SavedItemClickListener
 import com.example.weatherapp.presentation.screen.manageLocation.model.SearchClickListener
 
-class SearchViewAdapter(val recyclerViewInterface: SearchClickListener) :
+class SearchViewAdapter(private val recyclerViewSearchInterface: SearchClickListener) :
     RecyclerView.Adapter<SearchViewAdapter.MyViewHolder>() {
     private var citiesList: List<CityItem> = listOf()
 
@@ -35,7 +36,7 @@ class SearchViewAdapter(val recyclerViewInterface: SearchClickListener) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(citiesList[position])
         holder.itemView.setOnClickListener{
-            recyclerViewInterface.onSearchItemClick(citiesList[position])
+            recyclerViewSearchInterface.onSearchItemClick(citiesList[position])
         }
     }
 

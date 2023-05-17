@@ -9,6 +9,7 @@ import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentManageLocationBinding
@@ -16,16 +17,17 @@ import com.example.weatherapp.presentation.screen.manageLocation.adapter.SavedCi
 import com.example.weatherapp.presentation.screen.manageLocation.adapter.SearchViewAdapter
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityItem
 import com.example.weatherapp.presentation.screen.manageLocation.model.ManageLocationUiState
+import com.example.weatherapp.presentation.screen.manageLocation.model.SavedItemClickListener
 import com.example.weatherapp.presentation.screen.manageLocation.model.SearchClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ManageLocationFragment : Fragment(), SearchClickListener {
+class ManageLocationFragment : Fragment(), SearchClickListener, SavedItemClickListener {
     private var _binding: FragmentManageLocationBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ManageLocationViewModel by viewModels()
     private val searchViewAdapter = SearchViewAdapter(this)
-    private val savedCitiesAdapter = SavedCitiesAdapter()
+    private val savedCitiesAdapter = SavedCitiesAdapter(this)
     private val citiesList = mutableListOf<CityItem>()
 
     override fun onCreateView(
@@ -48,7 +50,7 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
         binding.savedCitiesRecView.visibility = View.VISIBLE
 
         binding.arrowBack.setOnClickListener {
-            findNavController().navigate(R.id.action_manageLocationFragment_to_weatherFragment)
+            findNavController().navigate(R.id.action_manageLocationFragment_to_weatherContainerFragment)
         }
 
         binding.manageLocationSearchView.setOnQueryTextListener(object : OnQueryTextListener {
@@ -89,5 +91,14 @@ class ManageLocationFragment : Fragment(), SearchClickListener {
         citiesList.add(cityItem)
         savedCitiesAdapter.setList(citiesList)
         binding.manageLocationSearchView.setQuery("", false)
+    }
+
+    override fun onSavedItemClick(cityItem: CityItem) {
+        findNavController().navigate(R.id.action_manageLocationFragment_to_weatherContainerFragment,
+            Bundle().apply {
+                putString("cityNameArgument", cityItem.name)
+                putDouble("latArgument", cityItem.lat)
+                putDouble("lonArgument", cityItem.lon)
+            })
     }
 }

@@ -3,29 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/weatherContainerFragment">
+    app:startDestination="@id/manageLocationFragment">
 
     <fragment
         android:id="@+id/weatherContainerFragment"
         android:name="com.example.weatherapp.presentation.screen.weather.WeatherContainerFragment"
         android:label="fragment_weatherContainer"
         tools:layout="@layout/fragment_weather_container">
+        <argument
+            android:name="cityNameArgument"
+            app:argType="cityItem"/>
         <action
-            android:id="@+id/action_weatherFragment_to_manageLocationFragment"
+            android:id="@+id/action_weatherContainerFragment_to_manageLocationFragment"
             app:destination="@id/manageLocationFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/weatherPageFragment"
-        android:name="com.example.weatherapp.presentation.screen.weatherPage.WeatherPageFragment"
-        android:label="fragment_weather_page"
-        tools:layout="@layout/fragment_weather_page" />
     <fragment
         android:id="@+id/manageLocationFragment"
         android:name="com.example.weatherapp.presentation.screen.manageLocation.ManageLocationFragment"
         android:label="fragment_manage_location"
         tools:layout="@layout/fragment_manage_location" >
         <action
-            android:id="@+id/action_manageLocationFragment_to_weatherFragment"
+            android:id="@+id/action_manageLocationFragment_to_weatherContainerFragment"
             app:destination="@id/weatherContainerFragment" />
     </fragment>
 </navigation>

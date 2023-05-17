@@ -7,16 +7,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.presentation.screen.manageLocation.model.CityItem
+import com.example.weatherapp.presentation.screen.manageLocation.model.SavedItemClickListener
 
 
-class SavedCitiesAdapter: RecyclerView.Adapter<SavedCitiesAdapter.ViewHolder>() {
+class SavedCitiesAdapter(private val recyclerViewSavedItemInterface: SavedItemClickListener) :
+    RecyclerView.Adapter<SavedCitiesAdapter.ViewHolder>() {
+
     private var savedCitiesList: List<CityItem> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val res = itemView.resources
         fun bind(citiesNames: CityItem) {
             val name: TextView = itemView.findViewById(R.id.savedCityName)
-            val country : TextView = itemView.findViewById(R.id.countryOfSavedCityName)
+            val country: TextView = itemView.findViewById(R.id.countryOfSavedCityName)
 
             country.text = citiesNames.country
             name.text = citiesNames.name
@@ -31,6 +34,9 @@ class SavedCitiesAdapter: RecyclerView.Adapter<SavedCitiesAdapter.ViewHolder>() 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(savedCitiesList[position])
+        holder.itemView.setOnClickListener{
+            recyclerViewSavedItemInterface.onSavedItemClick(savedCitiesList[position])
+        }
     }
 
     override fun getItemCount(): Int {

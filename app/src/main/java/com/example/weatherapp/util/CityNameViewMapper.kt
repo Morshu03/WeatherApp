@@ -9,7 +9,9 @@ object CityNameViewMapper {
         this?.map {
              CityItem(
                  name = it.name.toString(),
-                 country = it.country.toString()
+                 country = it.country.toString(),
+                 lat = it.lat ?: 0.0,
+                 lon = it.lon ?: 0.0
              )
         }
 }
