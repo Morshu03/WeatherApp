@@ -35,21 +35,21 @@ class WeatherContainerFragment : Fragment() {
         val latCity = requireArguments().getFloat("latArgument")
         val lonCity = requireArguments().getFloat("lonArgument")
 
-        if(currentCity.isNullOrEmpty()){
+        val cityBundle = Bundle()
+        cityBundle.apply {
+            putFloat("latitude", latCity)
+            putFloat("longitude", lonCity)
+        }
+
+        val weatherPageFragment = WeatherPageFragment()
+        weatherPageFragment.arguments = cityBundle
+
+        if (currentCity.isNullOrEmpty()) {
             binding.currentCityName.text = ""
         } else {
             binding.currentCityName.text = currentCity
         }
 
-        showToast(latCity.toString())
-
-        childFragmentManager.beginTransaction().replace(R.id.container, WeatherPageFragment()).commit()
+        childFragmentManager.beginTransaction().replace(R.id.container, weatherPageFragment).commit()
     }
-
-    private fun showToast(text: String) {
-        Toast.makeText(
-            activity, text, Toast.LENGTH_SHORT
-        ).show()
-    }
-
 }

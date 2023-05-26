@@ -54,6 +54,11 @@ class WeatherPageFragment : Fragment() {
                 }
             }
         }
+        val argsBundle: Bundle? = this.arguments
+        val latCity = argsBundle?.getFloat("latitude")
+        val lonCity = argsBundle?.getFloat("longitude")
+
+        viewModel.updateLocation()
     }
 
     private fun updateCurrentWeatherUiState(weatherView: WeatherPageView) {
@@ -71,12 +76,6 @@ class WeatherPageFragment : Fragment() {
         binding.currentMonthAndNumberOfMonth.text = weatherView.date
         binding.currentWeekDayOverRecyclerView.text = weatherView.dayOfWeek
         binding.currentMonthAndNumberOfMonthOverRecyclerView.text = weatherView.date
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.updateLocation()
     }
 
     private fun showToast(text: String) {
