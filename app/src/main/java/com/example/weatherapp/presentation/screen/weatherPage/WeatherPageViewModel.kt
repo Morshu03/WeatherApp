@@ -42,7 +42,7 @@ class WeatherPageViewModel @Inject constructor(
         }
     }
 
-    private fun fetchWeather(location: Location) {
+    fun fetchWeather(location: Location) {
         viewModelScope.launch() {
             val currentWeatherResponse = async {
                 repository.getCurrentWeatherConditions(

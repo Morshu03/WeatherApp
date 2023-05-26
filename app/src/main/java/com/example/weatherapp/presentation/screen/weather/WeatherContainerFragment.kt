@@ -31,7 +31,7 @@ class WeatherContainerFragment : Fragment() {
             findNavController().navigate(R.id.action_weatherContainerFragment_to_manageLocationFragment)
         }
 
-        val currentCity = requireArguments().getString("cityArgument")
+        val currentCity = requireArguments().getString(WEATHER_CONTAINER_CITY_ARGUMENT)
         val latCity = requireArguments().getFloat("latArgument")
         val lonCity = requireArguments().getFloat("lonArgument")
 
@@ -51,5 +51,9 @@ class WeatherContainerFragment : Fragment() {
         }
 
         childFragmentManager.beginTransaction().replace(R.id.container, weatherPageFragment).commit()
+    }
+
+    companion object {
+        const val WEATHER_CONTAINER_CITY_ARGUMENT = "cityArgument"
     }
 }

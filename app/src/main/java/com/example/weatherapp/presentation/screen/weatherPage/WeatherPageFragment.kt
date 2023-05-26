@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
+import com.example.weatherapp.data.entity.Location
 import com.example.weatherapp.databinding.FragmentWeatherPageBinding
 import com.example.weatherapp.presentation.screen.weatherPage.adapter.WeatherAdapter
 import com.example.weatherapp.presentation.screen.weatherPage.model.currentWeather.WeatherPageUiState
@@ -35,30 +36,49 @@ class WeatherPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initLayout()
+        initObservers()
+        processArguments()
+    }
+
+    private fun initLayout() {
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
+    }
 
-        viewModel.weatherUiStateLiveData.observe(viewLifecycleOwner) {
-            when (it) {
-                is WeatherPageUiState.Error -> {
-                    showToast(it.message)
-                }
-
-                is WeatherPageUiState.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.content.visibility = View.VISIBLE
-                    updateCurrentWeatherUiState(it.weatherView)
-                    adapter.setList(it.hourlyPageView.hourlyList?.toMutableList() ?: mutableListOf())
-                }
-            }
-        }
+    private fun processArguments() {
         val argsBundle: Bundle? = this.arguments
         val latCity = argsBundle?.getFloat("latitude")
         val lonCity = argsBundle?.getFloat("longitude")
 
-        viewModel.updateLocation()
+        if (latCity != null && lonCity != null) {
+            viewModel.fetchWeather(
+                Location(
+                    lat = latCity.toDouble(),
+                    lon = lonCity.toDouble()
+                )
+            )
+        } else {
+            viewModel.updateLocation()
+        }
+    }
+
+    private fun initObservers() {
+        viewModel.weatherUiStateLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is WeatherPageUiState.Error -> showToast(it.message)
+                is WeatherPageUiState.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.content.visibility = View.VISIBLE
+                    updateCurrentWeatherUiState(it.weatherView)
+                    adapter.setList(
+                        it.hourlyPageView.hourlyList?.toMutableList() ?: mutableListOf()
+                    )
+                }
+            }
+        }
     }
 
     private fun updateCurrentWeatherUiState(weatherView: WeatherPageView) {

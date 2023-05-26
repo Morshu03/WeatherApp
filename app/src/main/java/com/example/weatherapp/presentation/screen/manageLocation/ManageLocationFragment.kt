@@ -19,6 +19,7 @@ import com.example.weatherapp.presentation.screen.manageLocation.model.CityItem
 import com.example.weatherapp.presentation.screen.manageLocation.model.ManageLocationUiState
 import com.example.weatherapp.presentation.screen.manageLocation.model.SavedItemClickListener
 import com.example.weatherapp.presentation.screen.manageLocation.model.SearchClickListener
+import com.example.weatherapp.presentation.screen.weather.WeatherContainerFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -96,7 +97,7 @@ class ManageLocationFragment : Fragment(), SearchClickListener, SavedItemClickLi
     override fun onSavedItemClick(cityItem: CityItem) {
         findNavController().navigate(R.id.action_manageLocationFragment_to_weatherContainerFragment,
             Bundle().apply {
-                putString("cityArgument", cityItem.name)
+                putString(WeatherContainerFragment.WEATHER_CONTAINER_CITY_ARGUMENT, cityItem.name)
                 putFloat("latArgument", cityItem.lat.toFloat())
                 putFloat("lonArgument", cityItem.lon.toFloat())
             })
